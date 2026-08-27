@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Avatar } from './Avatar.jsx';
+import { CldImage } from '../lib/cloudinary.jsx';
 import { groupLabel, seasonLabel } from '../utils/format.js';
 
 export function collectPhotos(posts = []) {
@@ -7,6 +8,7 @@ export function collectPhotos(posts = []) {
     (p.images || []).map((img, index) => ({
       url: img.thumbnailUrl || img.webpUrl || img.url,
       full: img.url,
+      publicId: img.publicId,
       postId: p.id,
       key: `${p.id}-${index}`,
     })),
@@ -66,7 +68,14 @@ export function PhotoGrid({ photos }) {
     <div className="mt-4 grid grid-cols-3 gap-1 sm:gap-2">
       {photos.map((photo) => (
         <Link key={photo.key} to={`/post/${photo.postId}`} className="aspect-square overflow-hidden bg-stone-200">
-          <img src={photo.url} alt="" loading="lazy" className="h-full w-full object-cover" />
+          <CldImage
+            publicId={photo.publicId}
+            src={photo.url}
+            alt=""
+            width={400}
+            height={400}
+            className="h-full w-full object-cover"
+          />
         </Link>
       ))}
     </div>

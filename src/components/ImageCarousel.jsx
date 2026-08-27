@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { CldImage } from '../lib/cloudinary.jsx';
 
 export function ImageCarousel({ images, alt = 'Field photograph' }) {
   const [index, setIndex] = useState(0);
@@ -9,10 +10,12 @@ export function ImageCarousel({ images, alt = 'Field photograph' }) {
 
   return (
     <div className="relative overflow-hidden bg-navy-950">
-      <img
+      <CldImage
+        publicId={current.publicId}
         src={src}
         alt={current.alt || alt}
-        loading="lazy"
+        width={1200}
+        height={900}
         className="aspect-[4/3] w-full object-cover"
       />
       {images.length > 1 && (

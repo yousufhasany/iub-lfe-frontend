@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { api } from '../api/client.js';
 import { Spinner } from '../components/ui.jsx';
 import { PostCard } from '../components/PostCard.jsx';
+import { CldImage } from '../lib/cloudinary.jsx';
 import { groupLabel, seasonLabel, setSeo } from '../utils/format.js';
 import { useEffect } from 'react';
 
@@ -18,7 +19,16 @@ export function VenuesPage() {
         {(data || []).map((v) => (
           <Link key={v._id} to={`/venue/${v.slug}`} className="overflow-hidden rounded-2xl bg-white ring-1 ring-stone-200">
             <div className="aspect-[16/9] bg-navy-900">
-              {v.coverImage?.url && <img src={v.coverImage.url} alt="" className="h-full w-full object-cover" />}
+              {v.coverImage?.url && (
+                <CldImage
+                  publicId={v.coverImage.publicId}
+                  src={v.coverImage.url}
+                  alt=""
+                  width={900}
+                  height={500}
+                  className="h-full w-full object-cover"
+                />
+              )}
             </div>
             <div className="p-4">
               <p className="text-xs uppercase tracking-wide text-gold-500">
@@ -63,7 +73,17 @@ export function VenueDetailPage() {
   return (
     <div>
       <div className="overflow-hidden rounded-3xl bg-navy-900 text-white">
-        {venue.coverImage?.url && <img src={venue.coverImage.url} alt="" className="h-56 w-full object-cover opacity-70" />}
+        {venue.coverImage?.url && (
+          <CldImage
+            publicId={venue.coverImage.publicId}
+            src={venue.coverImage.url}
+            alt=""
+            width={1400}
+            height={560}
+            crop={false}
+            className="h-56 w-full object-cover opacity-70"
+          />
+        )}
         <div className="p-6">
           <p className="text-gold-400">
             {venue.district} · {venue.division}

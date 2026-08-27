@@ -4,6 +4,7 @@ import { api } from '../api/client.js';
 import { setSeo } from '../utils/format.js';
 import { useEffect } from 'react';
 import { ImageCarousel } from '../components/ImageCarousel.jsx';
+import { CldImage } from '../lib/cloudinary.jsx';
 
 export function LandingPage() {
   useEffect(() => {
@@ -74,7 +75,14 @@ export function LandingPage() {
             <Link key={v._id} to={`/venue/${v.slug}`} className="group overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-stone-200">
               <div className="aspect-[16/10] bg-navy-900">
                 {v.coverImage?.url && (
-                  <img src={v.coverImage.thumbnailUrl || v.coverImage.url} alt="" className="h-full w-full object-cover transition group-hover:scale-105" />
+                  <CldImage
+                    publicId={v.coverImage.publicId}
+                    src={v.coverImage.thumbnailUrl || v.coverImage.url}
+                    alt=""
+                    width={800}
+                    height={500}
+                    className="h-full w-full object-cover transition group-hover:scale-105"
+                  />
                 )}
               </div>
               <div className="p-4">
