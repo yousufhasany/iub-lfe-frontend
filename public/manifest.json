@@ -1,0 +1,17 @@
+{
+  "name": "IUB LFE",
+  "short_name": "IUB LFE",
+  "description": "Live in Field Experience community and archive for Independent University, Bangladesh.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fafaf9",
+  "theme_color": "#0b1f3a",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
